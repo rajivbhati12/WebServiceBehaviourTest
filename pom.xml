@@ -9,17 +9,71 @@
   <url>http://maven.apache.org</url>
   <properties>
     <java.version>1.8</java.version>
-    <junit.version>3.8.1</junit.version>
+    <junit.version>4.12</junit.version>
+    <info.cukes.version>1.2.5</info.cukes.version>
+    <org.apache.maven.plugins.version>2.20.1</org.apache.maven.plugins.version>
   </properties>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>${junit.version}</version>
+      <!--<scope>test</scope>-->
+    </dependency>
+    <dependency>
+      <groupId>info.cukes</groupId>
+      <artifactId>cucumber-java</artifactId>
+      <version>${info.cukes.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>info.cukes</groupId>
+      <artifactId>cucumber-core</artifactId>
+      <version>${info.cukes.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>info.cukes</groupId>
+      <artifactId>cucumber-junit</artifactId>
+      <version>${info.cukes.version}</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>RELEASE</version>
+      <!--<scope>test</scope>-->
+    </dependency>
+      <dependency>
+          <groupId>info.cukes</groupId>
+          <artifactId>cucumber-junit</artifactId>
+          <version>RELEASE</version>
+      </dependency>
   </dependencies>
   <build>
     <finalName>cucumber-framework-core</finalName>
+      <plugins>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-surefire-plugin</artifactId>
+              <version>${org.apache.maven.plugins.version}</version>
+              <executions>
+                  <execution>
+                      <id>default-test</id>
+                      <goals>
+                          <goal>test</goal>
+                      </goals>
+                  </execution>
+              </executions>
+          </plugin>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <configuration>
+                  <source>${java.version}</source>
+                  <target>${java.version}</target>
+              </configuration>
+          </plugin>
+      </plugins>
   </build>
 </project>
