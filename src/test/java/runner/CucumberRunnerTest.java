@@ -1,4 +1,4 @@
-package test.runner;
+package runner;
 
 /**
  * Created by rajivbhati on 2/26/18.
@@ -13,7 +13,7 @@ import cucumber.api.CucumberOptions;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/features",
-        glue = "src/test/services",
+        glue = {"steps"},
         format = {"pretty","html:target","json:target/WebServiceBehaviourTest.json"},
         tags = {"@heartbeat"},
         monochrome = true
