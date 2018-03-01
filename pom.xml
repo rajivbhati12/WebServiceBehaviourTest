@@ -11,6 +11,7 @@
         <java.version>1.8</java.version>
         <junit.version>4.12</junit.version>
         <info.cukes.version>1.2.5</info.cukes.version>
+        <spring.ws.core.version>3.0.0.RELEASE</spring.ws.core.version>
         <maven.surefire.plugin.version>2.20.1</maven.surefire.plugin.version>
         <maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>
     </properties>
@@ -35,6 +36,16 @@
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-junit</artifactId>
             <version>${info.cukes.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.ws</groupId>
+            <artifactId>spring-ws-core</artifactId>
+            <version>${spring.ws.core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.7</version>
         </dependency>
     </dependencies>
     <build>
