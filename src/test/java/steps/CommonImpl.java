@@ -33,7 +33,7 @@ public class CommonImpl extends BaseSvc {
     }
     @When("^I initiate the call$")
     public void initiateCall() throws Throwable{
-//        requestResponse.callHeartBeat();
+        requestResponse.callRestService();
         Assert.assertTrue("Missing Step impl",false);
     }
     @Then("^I should get a success in response$")
