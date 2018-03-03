@@ -11,14 +11,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import test.java.utilities.BaseSvc;
 import test.java.utilities.PropertyHelper;
-import test.java.utilities.RequestResponse;
-import test.java.utilities.TestConfig;
 /**
  * Created by rajivbhati on 2/27/18.
  */
 public class CommonImpl extends BaseSvc {
-    TestConfig testConfig = TestConfig.getInstance();
-    RequestResponse requestResponse = RequestResponse.getInstance();
 
     @Before
     public void before(Scenario scenario) throws Throwable{
@@ -27,18 +23,18 @@ public class CommonImpl extends BaseSvc {
         testConfig.setScenario(scenario);
     }
 
+
     @Given("^the service api$")
     public void setServiceApi() throws Throwable{
         requestResponse.setEndPointUrl(this.getEndPointUrl());
     }
     @When("^I initiate the call$")
     public void initiateCall() throws Throwable{
-        requestResponse.callRestService();
-        Assert.assertTrue("Missing Step impl",false);
+        requestResponse.callService();
     }
     @Then("^I should get a success in response$")
     public void verifySuccessfulResponse() throws Throwable{
-        Assert.assertTrue("Missing Step impl",false);
+        Assert.assertTrue("Missing Step impl",requestResponse.getResponseStatus() == 200);
     }
     @After
     public void after() throws Throwable{}

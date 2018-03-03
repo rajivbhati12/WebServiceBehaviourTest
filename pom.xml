@@ -13,7 +13,7 @@
         <info.cukes.version>1.2.5</info.cukes.version>
         <spring.ws.core.version>3.0.0.RELEASE</spring.ws.core.version>
         <org.apache.commons.lang3.version>3.7</org.apache.commons.lang3.version>
-        <org.glassfish.jersey.core.version>2.26</org.glassfish.jersey.core.version>
+        <com.sun.jersey.version>1.19.4</com.sun.jersey.version>
         <maven.surefire.plugin.version>2.20.1</maven.surefire.plugin.version>
         <maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>
     </properties>
@@ -50,9 +50,9 @@
             <version>${org.apache.commons.lang3.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
+            <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-client</artifactId>
-            <version>${org.glassfish.jersey.core.version}</version>
+            <version>${com.sun.jersey.version}</version>
         </dependency>
     </dependencies>
     <build>

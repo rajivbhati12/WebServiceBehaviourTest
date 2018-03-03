@@ -3,10 +3,10 @@ package test.java.utilities;
 /**
  * Created by rajivbhati on 2/28/18.
  */
-public class BaseSvc {
+public class BaseSvc extends Helper{
     private String endPoint;
-    TestConfig testConfig = TestConfig.getInstance();
-    RequestResponse requestResponse = RequestResponse.getInstance();
+    protected TestConfig testConfig = TestConfig.getInstance();
+    protected RequestResponse requestResponse = RequestResponse.getInstance();
 
     private String setEndPoint() throws Throwable {
         return testConfig.getProperty(
@@ -19,4 +19,6 @@ public class BaseSvc {
             this.endPoint = setEndPoint();
         return this.endPoint;
     }
+
+
 }
