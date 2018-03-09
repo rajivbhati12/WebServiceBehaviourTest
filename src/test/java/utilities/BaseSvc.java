@@ -10,7 +10,7 @@ public class BaseSvc extends Helper{
 
     private String setEndPoint() throws Throwable {
         return testConfig.getProperty(
-                testConfig.getServiceName() + "_endpoint"
+                testConfig.getServiceName() + ".endpoint"
         );
     }
 

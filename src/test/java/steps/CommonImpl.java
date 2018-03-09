@@ -23,7 +23,6 @@ public class CommonImpl extends BaseSvc {
         testConfig.setScenario(scenario);
     }
 
-
     @Given("^the service api$")
     public void setServiceApi() throws Throwable{
         requestResponse.setEndPointUrl(this.getEndPointUrl());
@@ -34,7 +33,7 @@ public class CommonImpl extends BaseSvc {
     }
     @Then("^I should get a success in response$")
     public void verifySuccessfulResponse() throws Throwable{
-        Assert.assertTrue("Missing Step impl",requestResponse.getResponseStatus() == 200);
+        Assert.assertEquals(new Long(200), new Long(requestResponse.getResponseStatus()));
     }
     @After
     public void after() throws Throwable{}

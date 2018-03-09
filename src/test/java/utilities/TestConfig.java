@@ -40,6 +40,6 @@ public class TestConfig {
         return this.environment.getProperty(propertyName);
     }
     public String getServiceName() throws Throwable{
-        return this.getTagValue("@Service:");
+        return this.getTagValue("@Service-");
     }
 }

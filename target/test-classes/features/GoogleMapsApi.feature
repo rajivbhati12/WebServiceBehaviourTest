@@ -1,4 +1,4 @@
-@Service:GoogleMaps
+@Service-GoogleMapsApi
 Feature: The Google Maps web services are a collection of HTTP interfaces to Google services
   providing geographic data for your maps applications
 
