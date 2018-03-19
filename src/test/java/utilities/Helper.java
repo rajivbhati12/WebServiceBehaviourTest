@@ -15,6 +15,7 @@ public class Helper {
                 paramterTypes[i] = parameterValueList[i].getClass();
         }
         Method method = onClass.getClass().getMethod(thisMethod,paramterTypes);
+//        Method method = onClass.getClass().getDeclaredMethod(thisMethod,paramterTypes);
         return (T) method.invoke(onClass,parameterValueList);
     }
 

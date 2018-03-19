@@ -1,14 +1,13 @@
 package test.java.utilities;
 
-//import com.sun.jersey.api.client.Client;
-//import org.glassfish.jersey.client.JerseyClient;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource.Builder;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.WebResource.Builder;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
-
+import gherkin.deps.com.google.gson.JsonParser;
+import org.apache.commons.lang3.StringUtils;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import java.util.HashMap;
@@ -21,8 +20,8 @@ public class RequestResponse extends Helper{
     private static RequestResponse requestResponse = null;
     private Object response;
     private Object request;
-    private String endPointUrl;
     private Integer responseStatus;
+    private TestConfig testConfig = TestConfig.getInstance();
 
     public static RequestResponse getInstance() {
         if(requestResponse == null)
@@ -42,6 +41,17 @@ public class RequestResponse extends Helper{
         this.response = response;
     }
 
+    private void setResponse(String response, String mediaType) {
+        switch (mediaType){
+            case "application/json":
+                this.setResponse((new JsonParser()).parse(response));
+                break;
+            default:
+                this.setResponse(response);
+                break;
+        }
+    }
+
     public <T> T getRequest() {
         return (T) request;
     }
@@ -50,17 +60,14 @@ public class RequestResponse extends Helper{
         this.request = request;
     }
 
-    public String getEndPointUrl() {
-        return endPointUrl;
+    private void createRequest() throws Throwable{
+        executeMethod(testConfig.getApiClassInstance(),
+                "createRequest_" + testConfig.getOperationName());
     }
 
-    public void setEndPointUrl(String endPointUrl) {
-        this.endPointUrl = endPointUrl;
-    }
-
-    public void callService() throws Throwable{
+    private void postRequest() throws Throwable{
         Client client = Client.create();
-        WebResource webResource = client.resource(this.getEndPointUrl());
+        WebResource webResource = client.resource(this.getEndPoint());
         webResource = webResource.queryParams(this.getQueryParams());
         Builder builder = webResource.getRequestBuilder();
         builder.entity(this.getEntity(),this.getMediaType());
@@ -69,20 +76,24 @@ public class RequestResponse extends Helper{
         builder.type(this.getMediaType());
         ClientResponse clientResponse = this.executeMethod(builder,this.getMethod(),ClientResponse.class);
         this.setResponseStatus(clientResponse.getStatus());
-        this.setResponse(clientResponse);
+        this.setResponse(clientResponse.getEntity(String.class),
+                StringUtils.substringBefore(clientResponse.getType().toString(),";"));
         client.destroy();
     }
 
     public <T> T getRequest(String key, T defaultValue){
-
         return
                 (this.getRequest() != null) && (((HashMap) this.getRequest()).containsKey(key)) ?
                         (T) ((HashMap) this.getRequest()).get(key) :
                         (T) defaultValue ;
     }
 
+    public String getEndPoint() {
+        return this.getRequest("ENDPOINT", "");
+    }
+
     public String getMethod() {
-        return this.getRequest("METHODS", "get");
+        return this.getRequest("METHOD", "get");
     }
 
     public MultivaluedMap<String,String> getQueryParams() {
@@ -109,4 +120,8 @@ public class RequestResponse extends Helper{
         this.responseStatus = responseStatus;
     }
 
+    public void InitiateRequestCall() throws Throwable{
+        this.createRequest();
+        this.postRequest();
+    }
 }

@@ -21,20 +21,20 @@ public class CommonImpl extends BaseSvc {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(PropertyHelper.class);
         testConfig.setEnvironment(applicationContext.getEnvironment());
         testConfig.setScenario(scenario);
+        testConfig.setApiClassInstance();
     }
-
 
     @Given("^the service api$")
     public void setServiceApi() throws Throwable{
-        requestResponse.setEndPointUrl(this.getEndPointUrl());
+        this.setEndPoint(this.getApiPropertyEndPoint());
     }
-    @When("^I initiate the call$")
+    @When("^I initiate the call.*$")
     public void initiateCall() throws Throwable{
-        requestResponse.callService();
+        requestResponse.InitiateRequestCall();
     }
     @Then("^I should get a success in response$")
     public void verifySuccessfulResponse() throws Throwable{
-        Assert.assertTrue("Missing Step impl",requestResponse.getResponseStatus() == 200);
+        Assert.assertEquals(new Long(200), new Long(requestResponse.getResponseStatus()));
     }
     @After
     public void after() throws Throwable{}
