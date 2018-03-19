@@ -15,7 +15,7 @@ import cucumber.api.CucumberOptions;
         features = "src/test/resources/features",
         glue = {"test/java/steps"},
         format = {"pretty","html:target","json:target/WebServiceBehaviourTest.json"},
-        tags = {"@heartbeat","@Service-GoogleMapsApi"},
+//        tags = {"@Smoke","@Service-GoogleMapsApi","@Operation-directions"},
         monochrome = true
 )
 public class CucumberRunnerTest {
