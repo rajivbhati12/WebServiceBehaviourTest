@@ -5,7 +5,7 @@
 
 Value:    Evaluate Behavior of any RestAPI without expensive coding
 
-Dependency: Java 8
+Dependency: Java 8 [Reflection and Lambda], Cucumber, Spring Core, Java Reflection
 
 Features:
 
