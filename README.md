@@ -14,3 +14,8 @@ Features:
 * Add Multi environment Support via Spring Annotation
 * How to pollinate build-in Reusability and Extensibility
 * Full support from simple single call API test to complex Multilayer API workflow test
+
+## Running Tests:
+```
+mvn test -Denvironment=prod -DapiKey=\<GoogleApiKey\>
+```
